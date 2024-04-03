@@ -31,7 +31,11 @@ describe('snapshot', () => {
   let page
   beforeAll(async () => {
     await waitForServer()
-    browser = await puppeteer.launch({ headless: 'new' })
+    browser = await puppeteer.launch({
+      headless: 'new',
+      executablePath: process.env.CHROMEWEBDRIVER,
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+    })
     page = await browser.newPage()
   }, 30000)
 
